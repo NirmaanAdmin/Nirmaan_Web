@@ -8,6 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
   <link rel="stylesheet"
@@ -27,17 +28,16 @@
       }
     }
   </style>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
   <div class="wrapper">
-
-
     <header class="header-5"
       style="background-image: url(./images/image\ \(2\).jpg); background-size: 100% 100%; background-repeat: no-repeat;">
       <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
-          <a class="navbar-brand" href="javascript:;">
+          <a class="navbar-brand" href="./index.html">
             <img src="./images/nirmaan favicon.png" style="padding-right:5px; padding-bottom: 5px;"><b
               class="text-primary">NIRMAAN360</b></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary"
@@ -379,7 +379,8 @@
           </div>
           <div class="col-lg-5 col-md-7 ml-auto mr-auto">
             <div class="card card-contact card-raised">
-              <form role="form" id="contact-form-1" method="post">
+              <form class="gform" id="contact-form-1" method="POST" data-email="ask@nirmaan360.com"
+                action="https://script.google.com/macros/s/AKfycbxzxfVMDYuk8aXvdoDzYiTmZkOXAe8bETGohUnCZch6ftNRBfxalfUbGllgFRknVlks/exec">
                 <div class="card-header text-center">
                   <h4 class="card-title">Contact Us</h4>
                 </div>
@@ -392,8 +393,8 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                           </div>
-                          <input class="form-control" placeholder="First Name..." aria-label="First Name..."
-                            type="text">
+                          <input class="form-control" id="FirstName" name="FirstName" placeholder="First Name..."
+                            aria-label="First Name..." type="text">
                         </div>
                       </div>
                     </div>
@@ -404,7 +405,8 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-collection"></i></span>
                           </div>
-                          <input class="form-control" type="text" placeholder="Last Name..." aria-label="Last Name...">
+                          <input class="form-control" id="LastName" name="LastName" type="text"
+                            placeholder="Last Name..." aria-label="Last Name...">
                         </div>
                       </div>
                     </div>
@@ -415,24 +417,28 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                       </div>
-                      <input class="form-control" type="text" placeholder="Email Here...">
+                      <input class="form-control" id="Email" name="Email" type="text" placeholder="Email Here..."
+                        required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label>Your message</label>
-                    <textarea class="form-control" name="message" id="message" rows="6"></textarea>
+                    <textarea class="form-control" id="Message" name="Message" id="message" rows="6"
+                      required></textarea>
                   </div>
+
                   <div class="row">
-                    <div class="col-md-6">
-                      <div class="custom-control custom-checkbox mt-2">
-                        <input class="custom-control-input" id="customCheck" type="checkbox"><label
-                          class="custom-control-label" for="customCheck">
-                          <span>I'm not a robot</span>
-                        </label>
-                      </div>
+                    <div class="col-md-12">
+                      <div class="g-recaptcha" data-callback="verifyCallback"
+                        data-sitekey="6LdtE2ElAAAAANPpgLHLFelOWCNz8-P1ZuebTpnP"></div>
+                      <br />
                     </div>
-                    <div class="col-md-6">
-                      <button class="btn btn-primary pull-right" type="submit">Send Message</button>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button class="btn btn-primary pull-right" type="submit">Send
+                        Message</button>
                     </div>
                   </div>
                 </div>
@@ -534,7 +540,20 @@
   <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE" type="text/javascript"></script>
   <script src="js/argon-design-system.min.js?v=1.0.2" type="text/javascript"></script>
+  <script data-cfasync="false" type="text/javascript" src="./form-submission-handler.js"></script>
   <script>
+    function sendEmail() {
+      let firstName = document.getElementById('FirstName').value;
+      let lastName = document.getElementById('LastName').value;
+      let toMail = document.getElementById('ToEmail').value;
+      let message = document.getElementById('MessageBody').value;
+      MailApp.sendEmail({
+        to: toMail,
+        subject: "Contact form submitted",
+        htmlBody: formatMailBody(message)
+      });
+    }
+
     function argonScripts() {
       if (document.querySelectorAll('.glide').length) {
         // Carousel
@@ -563,6 +582,9 @@
         ArgonKit.initGoogleMaps2();
       }
     }
+    function verifyCallback(response) {
+      
+    };
     argonScripts();
   </script>
 </body>
