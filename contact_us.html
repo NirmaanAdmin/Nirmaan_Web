@@ -19,6 +19,14 @@
   <link href="css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/creativetim/creativetim.min.css">
   <link rel="icon" sizes="16x16" href="./images/nirmaan favicon.png">
+  <style>
+    @media (max-width:991px) {
+      .hide {
+        display: none;
+      }
+    }
+  </style>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -133,8 +141,8 @@
         </div>
         <div class="col-lg-5 col-md-7 ml-auto mr-auto">
           <div class="card card-contact card-raised">
-            <form class="gform" id="contact-form-1" method="POST" data-email="yashpaida@yahoo.com"
-              action="https://script.google.com/macros/s/AKfycbwdfGgFWwh7UmswCcYd2JbdECVWyNjNcafjXYTWd8v_o2kdbTfB3E4V5xglpJPZw52E/exec">
+            <form class="gform" id="contact-form-1" method="POST" data-email="hsk@nirmaan360.com"
+              action="https://script.google.com/macros/s/AKfycbxzxfVMDYuk8aXvdoDzYiTmZkOXAe8bETGohUnCZch6ftNRBfxalfUbGllgFRknVlks/exec">
               <div class="card-header text-center">
                 <h4 class="card-title">Contact Us</h4>
               </div>
@@ -171,24 +179,27 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" id="Email" name="Email" type="text" placeholder="Email Here...">
+                    <input class="form-control" id="Email" name="Email" type="text" placeholder="Email Here..."
+                      required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Your message</label>
-                  <textarea class="form-control" id="Message" name="Message" id="message" rows="6"></textarea>
+                  <textarea class="form-control" id="Message" name="Message" id="message" rows="6" required></textarea>
                 </div>
+
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="custom-control custom-checkbox mt-2">
-                      <input class="custom-control-input" id="customCheck" type="checkbox"><label
-                        class="custom-control-label" for="customCheck">
-                        <span>I'm not a robot</span>
-                      </label>
-                    </div>
+                  <div class="col-md-12">
+                    <div class="g-recaptcha" data-callback="verifyCallback"
+                      data-sitekey="6LdtE2ElAAAAANPpgLHLFelOWCNz8-P1ZuebTpnP"></div>
+                    <br />
                   </div>
-                  <div class="col-md-6">
-                    <button class="btn btn-primary pull-right" type="submit">Send Message</button>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary pull-right" type="submit">Send
+                      Message</button>
                   </div>
                 </div>
               </div>
